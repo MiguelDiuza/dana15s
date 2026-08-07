@@ -112,10 +112,10 @@ function montarGaleria() {
   const items = $$('.gallery__item', pista);
   if (!items.length) return;
 
-  /* Si una foto todavía no existe, la tarjeta se ve intencional
+  /* Si una foto llegara a faltar, la tarjeta se ve intencional
      en vez de mostrar el ícono de imagen rota. */
   $$('img', pista).forEach((img) => {
-    const marcar = () => img.closest('figure')?.classList.add('is-missing');
+    const marcar = () => img.closest('.gallery__abrir')?.classList.add('is-missing');
     img.addEventListener('error', marcar);
     if (img.complete && img.naturalWidth === 0) marcar();
   });
@@ -136,13 +136,25 @@ function montarGaleria() {
   const botones = $$('button', puntos);
 
   function marcarActivo() {
-    const centro = pista.scrollLeft + pista.clientWidth / 2;
-    let activo = 0;
-    let menor = Infinity;
-    items.forEach((item, i) => {
-      const d = Math.abs(item.offsetLeft + item.clientWidth / 2 - centro);
-      if (d < menor) { menor = d; activo = i; }
-    });
+    const tope = pista.scrollWidth - pista.clientWidth;
+    let activo;
+
+    /* en los extremos la primera y la última tarjeta nunca llegan a
+       centrarse, así que se marcan por posición de scroll */
+    if (tope <= 1 || pista.scrollLeft <= 2) {
+      activo = 0;
+    } else if (pista.scrollLeft >= tope - 2) {
+      activo = items.length - 1;
+    } else {
+      const centro = pista.scrollLeft + pista.clientWidth / 2;
+      let menor = Infinity;
+      activo = 0;
+      items.forEach((item, i) => {
+        const d = Math.abs(item.offsetLeft + item.clientWidth / 2 - centro);
+        if (d < menor) { menor = d; activo = i; }
+      });
+    }
+
     botones.forEach((b, i) =>
       b.setAttribute('aria-current', i === activo ? 'true' : 'false')
     );
@@ -159,7 +171,90 @@ function montarGaleria() {
 }
 
 /* ─────────────────────────────────────────────────────────
-   4 · El hilo del itinerario arranca y termina en el centro
+   4 · Visor de fotos
+       Se cierra con el botón, tocando fuera de la imagen,
+       con Esc, y se navega con flechas o deslizando.
+   ───────────────────────────────────────────────────────── */
+function montarVisor() {
+  const visor = $('#visor');
+  const img = $('#visorImg');
+  const pie = $('#visorPie');
+  const contador = $('#visorContador');
+  const caja = $('#visorCaja');
+  const botones = $$('.gallery__abrir');
+
+  if (!visor || !img || !botones.length || typeof visor.showModal !== 'function') return;
+
+  const fotos = botones.map((b) => ({
+    full: b.dataset.full,
+    pie: b.dataset.pie,
+    alt: $('img', b)?.alt || b.dataset.pie
+  }));
+
+  let actual = 0;
+  let origen = null;
+
+  function pintar(i) {
+    actual = (i + fotos.length) % fotos.length;
+    const foto = fotos[actual];
+    img.src = foto.full;
+    img.alt = foto.alt;
+    pie.textContent = foto.pie;
+    contador.textContent = `${actual + 1} / ${fotos.length}`;
+  }
+
+  function abrir(i, disparador) {
+    origen = disparador || null;
+    pintar(i);
+    visor.showModal();
+    document.documentElement.classList.add('visor-abierto');
+  }
+
+  function cerrar() {
+    if (visor.open) visor.close();
+  }
+
+  visor.addEventListener('close', () => {
+    document.documentElement.classList.remove('visor-abierto');
+    /* devuelve el foco a la miniatura desde la que se abrió */
+    origen?.focus({ preventScroll: true });
+    origen = null;
+  });
+
+  botones.forEach((b, i) => {
+    b.addEventListener('click', () => abrir(i, b));
+  });
+
+  $('#visorCerrar')?.addEventListener('click', cerrar);
+  $('#visorPrev')?.addEventListener('click', () => pintar(actual - 1));
+  $('#visorNext')?.addEventListener('click', () => pintar(actual + 1));
+
+  /* clic fuera de la imagen: el destino es el propio <dialog> */
+  visor.addEventListener('click', (e) => {
+    if (e.target === visor) cerrar();
+  });
+
+  visor.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); pintar(actual - 1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); pintar(actual + 1); }
+  });
+
+  /* deslizar horizontalmente para cambiar de foto */
+  let inicioX = null;
+  caja?.addEventListener('touchstart', (e) => {
+    inicioX = e.changedTouches[0].clientX;
+  }, { passive: true });
+
+  caja?.addEventListener('touchend', (e) => {
+    if (inicioX === null) return;
+    const dx = e.changedTouches[0].clientX - inicioX;
+    if (Math.abs(dx) > 45) pintar(actual + (dx < 0 ? 1 : -1));
+    inicioX = null;
+  }, { passive: true });
+}
+
+/* ─────────────────────────────────────────────────────────
+   5 · El hilo del itinerario arranca y termina en el centro
        exacto del primer y del último nodo
    ───────────────────────────────────────────────────────── */
 function ajustarHilo() {
@@ -180,7 +275,7 @@ function ajustarHilo() {
 }
 
 /* ─────────────────────────────────────────────────────────
-   5 · Animación
+   6 · Animación
    ───────────────────────────────────────────────────────── */
 function montarAnimacion() {
   /* Sin GSAP o con movimiento reducido: todo se muestra tal cual
@@ -295,6 +390,7 @@ function montarAnimacion() {
 montarEnlaces();
 montarCuentaRegresiva();
 montarGaleria();
+montarVisor();
 ajustarHilo();
 montarAnimacion();
 

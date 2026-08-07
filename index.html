@@ -146,24 +146,51 @@
   </div>
 
   <div class="gallery" data-reveal>
-    <ul class="gallery__track" id="galleryTrack" tabindex="0" aria-label="Fotos del lugar, desliza para ver más">
+    <ul class="gallery__track" id="galleryTrack" aria-label="Fotos del lugar, desliza para ver más">
       <li class="gallery__item">
-        <figure>
-          <img src="assets/img/lugar-1.jpg" alt="Zona social y jardines de la Finca Santa Ana" loading="lazy" width="900" height="1125">
-          <figcaption>Zona social</figcaption>
-        </figure>
+        <button class="gallery__abrir" type="button"
+                data-full="assets/img/lugar/lugar-1.webp"
+                data-pie="Zona verde">
+          <img src="assets/img/lugar/lugar-1-th.webp" width="720" height="405" loading="lazy"
+               alt="Amplia zona verde con palmeras y la casa principal al fondo.">
+          <span class="gallery__pie">Zona verde</span>
+        </button>
       </li>
       <li class="gallery__item">
-        <figure>
-          <img src="assets/img/lugar-2.jpg" alt="Piscina de la Finca Santa Ana" loading="lazy" width="900" height="1125">
-          <figcaption>La piscina</figcaption>
-        </figure>
+        <button class="gallery__abrir" type="button"
+                data-full="assets/img/lugar/lugar-2.webp"
+                data-pie="La piscina">
+          <img src="assets/img/lugar/lugar-2-th.webp" width="720" height="405" loading="lazy"
+               alt="Piscina rodeada de palmeras y jardín, con la casa al fondo.">
+          <span class="gallery__pie">La piscina</span>
+        </button>
       </li>
       <li class="gallery__item">
-        <figure>
-          <img src="assets/img/lugar-3.jpg" alt="Zona de eventos de la Finca Santa Ana al atardecer" loading="lazy" width="900" height="1125">
-          <figcaption>Para la noche</figcaption>
-        </figure>
+        <button class="gallery__abrir" type="button"
+                data-full="assets/img/lugar/lugar-3.webp"
+                data-pie="Tobogán y jacuzzi">
+          <img src="assets/img/lugar/lugar-3-th.webp" width="720" height="960" loading="lazy"
+               alt="Piscina grande con tobogán azul y jacuzzi al lado.">
+          <span class="gallery__pie">Tobogán y jacuzzi</span>
+        </button>
+      </li>
+      <li class="gallery__item">
+        <button class="gallery__abrir" type="button"
+                data-full="assets/img/lugar/lugar-4.webp"
+                data-pie="El salón">
+          <img src="assets/img/lugar/lugar-4-th.webp" width="720" height="405" loading="lazy"
+               alt="Salón cubierto con techo de vigas de madera, mesas y sillas.">
+          <span class="gallery__pie">El salón</span>
+        </button>
+      </li>
+      <li class="gallery__item">
+        <button class="gallery__abrir" type="button"
+                data-full="assets/img/lugar/lugar-5.webp"
+                data-pie="De noche">
+          <img src="assets/img/lugar/lugar-5-th.webp" width="720" height="405" loading="lazy"
+               alt="La piscina y la casa iluminadas de noche, con sombrillas y hamacas.">
+          <span class="gallery__pie">De noche</span>
+        </button>
       </li>
     </ul>
     <div class="gallery__dots" id="galleryDots"></div>
@@ -223,6 +250,31 @@
     Confirmar asistencia
   </a>
 </div>
+
+<!-- ══════════════════════ VISOR DE FOTOS ══════════════════════ -->
+<dialog class="visor" id="visor" aria-label="Foto del lugar">
+  <div class="visor__caja" id="visorCaja">
+    <img class="visor__img" id="visorImg" src="" alt="">
+    <p class="visor__pie"><span id="visorPie"></span><small id="visorContador"></small></p>
+  </div>
+
+  <button class="visor__cerrar" id="visorCerrar" type="button" aria-label="Cerrar la foto">
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+      <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/>
+    </svg>
+  </button>
+
+  <button class="visor__nav visor__nav--prev" id="visorPrev" type="button" aria-label="Foto anterior">
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+      <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M15 5l-7 7 7 7"/>
+    </svg>
+  </button>
+  <button class="visor__nav visor__nav--next" id="visorNext" type="button" aria-label="Foto siguiente">
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+      <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+    </svg>
+  </button>
+</dialog>
 
 <script src="assets/js/vendor/gsap.min.js" defer></script>
 <script src="assets/js/vendor/ScrollTrigger.min.js" defer></script>

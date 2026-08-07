@@ -551,36 +551,52 @@ a{ color:inherit; }
 
 .gallery__item{
   flex:0 0 auto;
-  width:min(74vw,17.5rem);
+  width:min(80vw,20rem);
   scroll-snap-align:center;
 }
 
-.gallery__item figure{
+.gallery__abrir{
+  display:block;
   position:relative;
-  aspect-ratio:4/5;
+  width:100%;
+  aspect-ratio:4/3;
+  padding:0;
+  border:0;
   border-radius:1.15rem;
   overflow:hidden;
+  cursor:zoom-in;
   background:linear-gradient(150deg,#5E0E31,#A3114F 55%,#D6337A);
   box-shadow:var(--shadow-lift);
+  transition:transform .4s var(--ease), box-shadow .4s var(--ease);
 }
-.gallery__item img{
+.gallery__abrir:hover,
+.gallery__abrir:focus-visible{
+  transform:translateY(-3px);
+  box-shadow:0 28px 56px -22px rgba(42,11,24,.6);
+}
+.gallery__abrir:active{ transform:translateY(0) scale(.99); }
+
+.gallery__abrir img{
   width:100%; height:100%;
   object-fit:cover;
 }
-.gallery__item figcaption{
+
+.gallery__pie{
   position:absolute; left:0; right:0; bottom:0;
-  padding:2.5rem .95rem .9rem;
+  padding:2.5rem .95rem .85rem;
+  font-family:var(--body);
   font-size:.72rem;
   font-weight:600;
   letter-spacing:.18em;
   text-transform:uppercase;
+  text-align:left;
   color:#FDF4EE;
-  background:linear-gradient(180deg,transparent,rgba(36,5,19,.82));
+  background:linear-gradient(180deg,transparent,rgba(36,5,19,.85));
 }
 
-/* Estado elegante mientras no existan las fotos reales */
-.gallery__item figure.is-missing img{ display:none; }
-.gallery__item figure.is-missing::after{
+/* Respaldo por si alguna foto llegara a faltar */
+.gallery__abrir.is-missing img{ display:none; }
+.gallery__abrir.is-missing::after{
   content:"Foto pendiente";
   position:absolute; inset:0;
   display:grid; place-content:center;
@@ -589,6 +605,101 @@ a{ color:inherit; }
   font-size:1.05rem;
   color:rgba(253,244,238,.72);
 }
+
+/* ─── 8b. Visor de fotos ────────────────────────────────── */
+.visor{
+  position:fixed; inset:0;
+  width:100%; height:100%;
+  max-width:none; max-height:none;
+  margin:0; padding:0; border:0;
+  background:transparent;
+  color:#FDF4EE;
+  overflow:hidden;
+}
+/* velo sólido, sin backdrop-filter: el desenfoque a pantalla completa
+   es caro en móvil y deja halos alrededor de los botones */
+.visor::backdrop{ background:rgba(18,3,10,.94); }
+.visor[open]{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:4.5rem 1rem calc(3.5rem + env(safe-area-inset-bottom));
+}
+
+.visor__caja{
+  display:flex;
+  flex-direction:column;
+  gap:.85rem;
+  max-width:100%;
+  animation:visorEntra .38s var(--ease) both;
+}
+
+.visor__img{
+  max-width:100%;
+  max-height:calc(100svh - 11rem);
+  width:auto; height:auto;
+  margin-inline:auto;
+  object-fit:contain;
+  border-radius:.9rem;
+  background:#2D0718;
+  box-shadow:0 34px 80px -24px rgba(0,0,0,.85);
+}
+
+.visor__pie{
+  display:flex;
+  align-items:baseline;
+  justify-content:center;
+  gap:.85rem;
+  font-size:.72rem;
+  font-weight:600;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:rgba(253,244,238,.9);
+}
+.visor__pie small{
+  font-size:.68rem;
+  letter-spacing:.12em;
+  color:var(--gold);
+  font-variant-numeric:tabular-nums;
+}
+
+.visor__cerrar,
+.visor__nav{
+  position:absolute;
+  display:grid; place-content:center;
+  width:2.75rem; height:2.75rem;
+  padding:0;
+  border-radius:50%;
+  border:1px solid rgba(244,223,160,.28);
+  background:rgba(36,5,19,.72);
+  color:var(--gold-hi);
+  cursor:pointer;
+  transition:background .3s var(--ease), border-color .3s var(--ease), transform .3s var(--ease);
+}
+.visor__cerrar:hover,
+.visor__nav:hover,
+.visor__cerrar:focus-visible,
+.visor__nav:focus-visible{
+  background:rgba(163,17,79,.75);
+  border-color:rgba(244,223,160,.6);
+}
+.visor__cerrar:active,
+.visor__nav:active{ transform:scale(.94); }
+
+.visor__cerrar{ top:1rem; right:1rem; }
+.visor__nav{ top:50%; margin-top:-1.375rem; }
+.visor__nav--prev{ left:.65rem; }
+.visor__nav--next{ right:.65rem; }
+
+@keyframes visorEntra{
+  from{ opacity:0; transform:scale(.96) translateY(10px); }
+  to  { opacity:1; transform:none; }
+}
+
+/* mientras el visor está abierto, la página de atrás no se mueve
+   y la barra de confirmación se aparta */
+.visor-abierto{ overflow:hidden; }
+.visor-abierto .rsvp{ opacity:0; pointer-events:none; }
 
 .gallery__dots{
   display:flex; justify-content:center; gap:.45rem;
@@ -724,7 +835,7 @@ a{ color:inherit; }
   padding:.6rem var(--pad) calc(.85rem + env(safe-area-inset-bottom));
   pointer-events:none;
   transform:translateY(140%);
-  transition:transform .55s var(--ease);
+  transition:transform .55s var(--ease), opacity .3s var(--ease);
 }
 .rsvp.is-visible{ transform:translateY(0); }
 .rsvp .btn{
@@ -838,14 +949,15 @@ a{ color:inherit; }
   .dress__peonia--a{ top:-3rem; left:-3rem; }
   .dress__peonia--b{ bottom:-3.5rem; right:-3rem; width:11rem; }
 
-  /* — Galería en tres columnas dentro de la tarjeta — */
-  .gallery__track{
-    justify-content:center;
-    overflow-x:visible;
-    padding-inline:var(--pad);
-  }
-  .gallery__item{ width:min(32%,15rem); }
-  .gallery__dots{ display:none; }
+  /* — Galería: sigue siendo carrusel, con tres fotos a la vista — */
+  .gallery__track{ padding-inline:var(--pad); }
+  .gallery__item{ width:min(30%,16rem); }
+
+  .visor[open]{ padding:5rem 5.5rem calc(4rem + env(safe-area-inset-bottom)); }
+  .visor__img{ max-height:calc(100vh - 12rem); }
+  .visor__cerrar{ top:1.5rem; right:1.5rem; }
+  .visor__nav--prev{ left:1.5rem; }
+  .visor__nav--next{ right:1.5rem; }
 
   .map{ aspect-ratio:16/10; }
   .stop__note{ font-size:.96rem; max-width:42ch; }

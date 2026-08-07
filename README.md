@@ -8,9 +8,9 @@ externas en tiempo de ejecución: abre `index.html` y funciona.
 
 ---
 
-## Falta por llenar (2 cosas)
+## Falta por llenar (1 cosa)
 
-### 1. Número de WhatsApp para confirmar asistencia
+### Número de WhatsApp para confirmar asistencia
 
 En [assets/js/main.js](assets/js/main.js), primera línea de `CONFIG`:
 
@@ -22,45 +22,38 @@ Formato internacional, sin `+` y sin espacios. Mientras esté vacío el botón
 igual funciona: abre WhatsApp con el mensaje escrito y el invitado elige el
 contacto a mano.
 
-### 2. Las 3 fotos del lugar
-
-No las descargué de la ficha de Google: son fotos de terceros y republicarlas
-en un sitio propio es un tema de derechos que te corresponde decidir a ti.
-La galería ya está armada y esperándolas.
-
-Guarda tres fotos en `assets/img/` con estos nombres exactos:
-
-```
-assets/img/lugar-1.jpg   → "Zona social"
-assets/img/lugar-2.jpg   → "La piscina"
-assets/img/lugar-3.jpg   → "Para la noche"
-```
-
-Recomendado: vertical, ~900 × 1125 px, menos de 250 KB cada una.
-Los títulos de cada tarjeta se cambian en [index.html](index.html), en los
-`<figcaption>` de la sección galería.
-
-Mientras no existan, las tarjetas muestran un degradado magenta con la leyenda
-*"Foto pendiente"* — se ve intencional, no roto.
-
 ---
 
 ## Cómo publicarlo
 
-### GitHub Pages
+### Vercel (recomendado)
+
+Es un sitio estático puro, así que Vercel lo despliega sin configuración.
 
 ```bash
-git add -A
-git commit -m "Invitación 15 años Dana Isabel"
 git push
 ```
 
-Luego en el repo: **Settings → Pages → Source: Deploy from a branch → `main` / `root`**.
+Luego en [vercel.com/new](https://vercel.com/new) importa el repositorio.
+Cuando pregunte por el framework, elige **Other**; deja Build Command y Output
+Directory vacíos. El [vercel.json](vercel.json) ya trae las cabeceras de caché
+(las imágenes y GSAP se cachean un año, el CSS y el JS se revalidan siempre).
+
+Alternativa desde la terminal:
+
+```bash
+npx vercel --prod
+```
+
+### GitHub Pages
+
+**Settings → Pages → Source: Deploy from a branch → `main` / `root`**.
 Queda en `https://<usuario>.github.io/dana15s/`.
 
 ### Cualquier otro hosting
 
-Sube la carpeta completa. No hay rutas absolutas ni configuración de servidor.
+Sube la carpeta completa. No hay build, ni rutas absolutas, ni configuración
+de servidor.
 
 ---
 
@@ -68,9 +61,10 @@ Sube la carpeta completa. No hay rutas absolutas ni configuración de servidor.
 
 ```
 index.html                    Todo el contenido, en orden de scroll
+vercel.json                   Cabeceras de caché
 assets/
   css/styles.css              Tokens, componentes y breakpoints
-  js/main.js                  CONFIG + cuenta regresiva + galería + animación
+  js/main.js                  CONFIG + cuenta regresiva + galería + visor + animación
   js/vendor/                  GSAP y ScrollTrigger (locales, no CDN)
   img/
     dana-retrato.jpg          Retrato del hero (1100px)
@@ -79,11 +73,26 @@ assets/
     mariposa.png              Mariposa dorada recortada
     peonia.png                Peonía magenta recortada
     flyer-original.jpg        El flyer, usado como vista previa al compartir
-    lugar-1..3.jpg            ← pendientes
+    lugar/
+      lugar-1..5.webp         Fotos del lugar, tamaño completo (visor)
+      lugar-1..5-th.webp      Miniaturas de la galería (720px)
 ```
 
 Secciones, en orden: **Hero → Detalles → Itinerario → Galería → Ubicación →
 Código de vestimenta → Footer**, más la barra fija de *Confirmar asistencia*.
+
+### La galería y el visor
+
+Las miniaturas (313 KB en total) son lo único que carga con la página; las
+fotos completas (935 KB) solo se piden al abrir el visor.
+
+Para cambiar una foto, reemplaza el par `lugar-N.webp` + `lugar-N-th.webp`.
+El título y el texto alternativo de cada una están en
+[index.html](index.html), en `data-pie` y en el `alt` de la miniatura.
+
+El visor usa `<dialog>` nativo. Se cierra con el botón ✕, tocando fuera de la
+foto o con **Esc**; se navega con las flechas en pantalla, con las teclas ←→ o
+deslizando el dedo. Al cerrarse devuelve el foco a la miniatura de origen.
 
 ---
 
