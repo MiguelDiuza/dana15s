@@ -12,7 +12,7 @@ const CONFIG = {
      Formato internacional, sin +, sin espacios. Ej. Colombia: "573001234567".
      Mientras esté vacío, el botón abre WhatsApp para que el invitado
      elija el contacto a mano. */
-  whatsapp: '',
+  whatsapp: '573113852488',
 
   mensaje: '¡Hola! Confirmo mi asistencia a los 15 de Dana Isabel el sábado 22 de agosto. 🎉',
 
@@ -61,7 +61,27 @@ function montarEnlaces() {
 }
 
 /* ─────────────────────────────────────────────────────────
-   2 · Cuenta regresiva
+   2 · El mapa: dormido hasta que se toca
+       El iframe de Google Maps captura cualquier gesto de arrastre o
+       pellizco. Dentro de una página con scroll eso hace que mover el
+       mapa y deslizar la página se peleen por el mismo toque. Por eso
+       arranca con pointer-events:none y un botón encima; un solo toque
+       lo despierta y a partir de ahí el pan/zoom nativo de Google Maps
+       queda libre de esa interferencia.
+   ───────────────────────────────────────────────────────── */
+function montarMapa() {
+  const mapa = $('#mapa');
+  const activar = $('#mapaActivar');
+  if (!mapa || !activar) return;
+
+  activar.addEventListener('click', () => {
+    mapa.classList.add('is-activo');
+    $('iframe', mapa)?.focus();
+  }, { once: true });
+}
+
+/* ─────────────────────────────────────────────────────────
+   3 · Cuenta regresiva
    ───────────────────────────────────────────────────────── */
 function montarCuentaRegresiva() {
   const caja = $('#countdown');
@@ -102,7 +122,7 @@ function montarCuentaRegresiva() {
 }
 
 /* ─────────────────────────────────────────────────────────
-   3 · Galería: puntos, sincronía con el scroll y fotos ausentes
+   4 · Galería: puntos, sincronía con el scroll y fotos ausentes
    ───────────────────────────────────────────────────────── */
 function montarGaleria() {
   const pista = $('#galleryTrack');
@@ -171,7 +191,7 @@ function montarGaleria() {
 }
 
 /* ─────────────────────────────────────────────────────────
-   4 · Visor de fotos
+   5 · Visor de fotos
        Se cierra con el botón, tocando fuera de la imagen,
        con Esc, y se navega con flechas o deslizando.
    ───────────────────────────────────────────────────────── */
@@ -254,7 +274,7 @@ function montarVisor() {
 }
 
 /* ─────────────────────────────────────────────────────────
-   5 · El hilo del itinerario arranca y termina en el centro
+   6 · El hilo del itinerario arranca y termina en el centro
        exacto del primer y del último nodo
    ───────────────────────────────────────────────────────── */
 function ajustarHilo() {
@@ -275,7 +295,7 @@ function ajustarHilo() {
 }
 
 /* ─────────────────────────────────────────────────────────
-   6 · Animación
+   7 · Animación
    ───────────────────────────────────────────────────────── */
 function montarAnimacion() {
   /* Sin GSAP o con movimiento reducido: todo se muestra tal cual
@@ -388,6 +408,7 @@ function montarAnimacion() {
    Arranque
    ───────────────────────────────────────────────────────── */
 montarEnlaces();
+montarMapa();
 montarCuentaRegresiva();
 montarGaleria();
 montarVisor();

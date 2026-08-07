@@ -208,13 +208,27 @@
       <span>Rozo, Palmira — Valle del Cauca</span>
     </address>
 
-    <div class="map" data-reveal>
+    <!-- El mapa arranca "dormido": hasta que se toca el botón, el iframe
+         no captura gestos y la página se desliza normal por encima. Sin
+         esto, en móvil cada intento de hacer scroll se confundía con un
+         intento de mover el mapa. -->
+    <div class="map" id="mapa" data-reveal>
       <iframe
         title="Mapa de la Finca Santa Ana en Rozo, Valle del Cauca"
         src="https://www.google.com/maps?q=Finca%20Campestre%20Santa%20Ana%2C%20Callej%C3%B3n%20El%20Fuerte%2C%20La%20Torre%2C%20Rozo%2C%20Palmira%2C%20Valle%20del%20Cauca&hl=es&z=15&output=embed"
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
+        tabindex="-1"
         allowfullscreen></iframe>
+
+      <button class="map__activar" type="button" id="mapaActivar">
+        <span class="map__icono" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22">
+            <path fill="currentColor" d="M12 2C7.6 2 4 5.6 4 10c0 5.2 6.6 11.1 7.3 11.7a1 1 0 0 0 1.4 0C13.4 21.1 20 15.2 20 10c0-4.4-3.6-8-8-8Zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
+          </svg>
+        </span>
+        Toca para explorar el mapa
+      </button>
     </div>
 
     <a class="btn btn--ghost" id="btnRuta" href="#" target="_blank" rel="noopener">Trazar mi ruta en Google Maps</a>

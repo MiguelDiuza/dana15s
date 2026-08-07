@@ -8,22 +8,6 @@ externas en tiempo de ejecución: abre `index.html` y funciona.
 
 ---
 
-## Falta por llenar (1 cosa)
-
-### Número de WhatsApp para confirmar asistencia
-
-En [assets/js/main.js](assets/js/main.js), primera línea de `CONFIG`:
-
-```js
-whatsapp: '',   // ← pon aquí el número, ej. '573001234567'
-```
-
-Formato internacional, sin `+` y sin espacios. Mientras esté vacío el botón
-igual funciona: abre WhatsApp con el mensaje escrito y el invitado elige el
-contacto a mano.
-
----
-
 ## Cómo publicarlo
 
 ### Vercel (recomendado)
@@ -93,6 +77,17 @@ El título y el texto alternativo de cada una están en
 El visor usa `<dialog>` nativo. Se cierra con el botón ✕, tocando fuera de la
 foto o con **Esc**; se navega con las flechas en pantalla, con las teclas ←→ o
 deslizando el dedo. Al cerrarse devuelve el foco a la miniatura de origen.
+
+### El mapa
+
+El mapa arranca "dormido": el iframe no captura gestos hasta que se toca el
+botón *"Toca para explorar el mapa"*. Sin esto, en móvil cualquier intento de
+seguir bajando por la página se confundía con un intento de mover el mapa, y
+viceversa — el reclamo original era justo ese. Un toque lo despierta y a
+partir de ahí el pan/zoom nativo de Google Maps queda libre.
+
+El botón de "Trazar mi ruta" no depende de este estado: siempre lleva directo
+a la app de Google Maps, sea que el mapa embebido se haya tocado o no.
 
 ---
 
