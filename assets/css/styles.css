@@ -193,7 +193,7 @@ a{ color:inherit; }
 
 .hero__velvet{
   position:absolute; inset:-8% -4%;
-  background:url("../img/terciopelo.jpg") center/cover no-repeat;
+  background:url("../img/terciopelo.jpg?v=azul") center/cover no-repeat;
   opacity:.9;
   will-change:transform;
 }
@@ -808,7 +808,7 @@ a{ color:inherit; }
   overflow:hidden;
   background:
     linear-gradient(180deg,rgba(6,15,40,.55),rgba(14,30,74,.75)),
-    url("../img/terciopelo.jpg") center/cover no-repeat;
+    url("../img/terciopelo.jpg?v=azul") center/cover no-repeat;
 }
 
 .dress__peonia{
@@ -943,7 +943,7 @@ a{ color:inherit; }
     background-color:#0A1633;
     background-image:
       linear-gradient(rgba(5,12,31,.62),rgba(5,12,31,.62)),
-      url("../img/terciopelo.jpg");
+      url("../img/terciopelo.jpg?v=azul");
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;

@@ -94,9 +94,19 @@ año sin volver a preguntar. En [vercel.json](vercel.json) van con
 `max-age=300, must-revalidate`, que las deja frescas cinco minutos y después
 revalida contra el ETag — un 304 y nada de tráfico.
 
-Si cambias una imagen y quieres verla al instante en tu propio navegador, haz
-una recarga forzada (**Ctrl + Shift + R**). Para el resto de la gente basta con
-el despliegue.
+Además, las imágenes que cambiaron de magenta a azul se piden con `?v=azul`
+al final de la URL. Eso hace falta porque la cabecera vieja sí decía
+`immutable`: quien haya abierto la página antes tiene guardada la versión
+magenta y su navegador no volverá a preguntar por ella. El sufijo cambia la
+URL, así que la petición es nueva y nadie se queda con la imagen antigua.
+
+**Si vuelves a reemplazar una imagen conservando su nombre, cambia también ese
+sufijo** (`?v=azul` → `?v=3`, por ejemplo) en [index.html](index.html) y en
+[styles.css](assets/css/styles.css). Si le pones un nombre nuevo al archivo, no
+hace falta sufijo.
+
+Para verlo al instante en tu propio navegador: recarga forzada
+(**Ctrl + Shift + R**).
 
 ### El mapa
 
