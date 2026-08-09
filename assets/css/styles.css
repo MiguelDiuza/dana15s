@@ -206,7 +206,7 @@ a{ color:inherit; }
   will-change:transform;
 }
 
-/* Velo que funde el retrato con el vino y da contraste al texto */
+/* Velo que funde el retrato con el azul de fondo y da contraste al texto */
 .hero__scrim{
   position:absolute; inset:0;
   background:
@@ -480,7 +480,7 @@ a{ color:inherit; }
 }
 .timeline__thread-base{ opacity:.16; }
 /* Se revela con clip-path, no con scaleY: escalar comprimiría el degradado
-   y el hilo mostraría los colores de la noche desde el mediodía. */
+   y el hilo mostraría los colores de la noche desde la tarde. */
 .timeline__thread-fill{
   clip-path:inset(0 0 100% 0);
   filter:drop-shadow(0 0 5px rgba(59,114,217,.45));

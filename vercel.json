@@ -3,11 +3,22 @@
   "cleanUrls": true,
   "headers": [
     {
-      "source": "/assets/(img|js/vendor)/(.*)",
+      "_comentario": "GSAP va con version fija en la ruta: eso si no cambia nunca.",
+      "source": "/assets/js/vendor/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
           "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "_comentario": "Las imagenes conservan el nombre cuando se reemplazan, asi que NO pueden ir como immutable: el navegador se quedaria con la version vieja durante un anio sin volver a preguntar. Con esto quedan frescas 5 minutos y despues revalidan contra el ETag (respuesta 304, practicamente gratis).",
+      "source": "/assets/img/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=300, must-revalidate"
         }
       ]
     },
