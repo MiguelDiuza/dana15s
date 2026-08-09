@@ -7,22 +7,22 @@
 /* ─── 1. Tokens ─────────────────────────────────────────── */
 :root{
   /* Color */
-  --ink:        #2A0B18;   /* texto principal sobre papel */
-  --ink-soft:   #71465A;   /* texto secundario */
-  --wine:       #3F0A22;   /* fondo profundo (terciopelo) */
-  --wine-deep:  #240513;   /* footer */
-  --magenta:    #A3114F;   /* color principal del flyer */
-  --fuchsia:    #D6337A;   /* magenta con luz */
+  --ink:        #0F1A38;   /* texto principal sobre papel */
+  --ink-soft:   #4A5878;   /* texto secundario */
+  --noche:       #0E1E4A;   /* fondo profundo (terciopelo) */
+  --noche-honda:  #060F28;   /* footer */
+  --azul:    #1D3F8F;   /* color principal del flyer */
+  --azul-luz:    #3B72D9;   /* azul con luz */
   --gold:       #C9A227;
   --gold-hi:    #F4DFA0;
   --gold-dp:    #8C6A12;
-  --ivory:      #FBF6F1;   /* el "papel" de la invitación */
-  --ivory-2:    #F2E7DF;
+  --ivory:      #FAF7F2;   /* el "papel" de la invitación */
+  --ivory-2:    #EBE8E1;
 
   /* Lámina de oro: se usa con background-clip:text */
   --foil: linear-gradient(158deg,#F7E7B8 0%,#C9A227 24%,#8C6A12 42%,#FBF0CE 56%,#C9A227 76%,#7F5F0E 100%);
-  /* El día completo, en un solo degradado: mediodía → amanecer */
-  --hilo: linear-gradient(180deg,#F4DFA0 0%,#E8A33F 20%,#D6337A 50%,#7A0D3B 76%,#2A0B18 100%);
+  /* El día completo, en un solo degradado: tarde → noche */
+  --hilo: linear-gradient(180deg,#F4DFA0 0%,#E8A33F 20%,#3B72D9 50%,#12306F 76%,#0F1A38 100%);
 
   /* Tipografía */
   --display: "Playfair Display", Georgia, "Times New Roman", serif;
@@ -33,7 +33,7 @@
   --pad: 1.5rem;
   --gap-section: clamp(4.5rem, 14vw, 8rem);
 
-  --shadow-lift: 0 22px 48px -22px rgba(42,11,24,.5);
+  --shadow-lift: 0 22px 48px -22px rgba(15,26,56,.5);
   --shadow-deep: 0 30px 70px -30px rgba(0,0,0,.7);
   --ease: cubic-bezier(.22,.61,.36,1);
 }
@@ -51,7 +51,7 @@ body{
   margin:0;
   /* mismo tono que el footer: es lo único que se ve bajo él, en el hueco
      que deja el padding para la barra de confirmación */
-  background-color:var(--wine-deep);
+  background-color:var(--noche-honda);
   color:var(--ink);
   font-family:var(--body);
   font-size:1rem;
@@ -105,7 +105,7 @@ a{ color:inherit; }
   font-weight:600;
   letter-spacing:.24em;
   text-transform:uppercase;
-  color:var(--magenta);
+  color:var(--azul);
   margin-bottom:1rem;
   line-height:1.5;
 }
@@ -166,13 +166,13 @@ a{ color:inherit; }
 .btn--ghost{
   width:100%;
   margin-top:1.25rem;
-  color:var(--magenta);
+  color:var(--azul);
   background:transparent;
-  border:1px solid rgba(163,17,79,.35);
+  border:1px solid rgba(29,63,143,.35);
 }
 .btn--ghost:hover,.btn--ghost:focus-visible{
-  background:rgba(163,17,79,.06);
-  box-shadow:0 10px 24px -14px rgba(163,17,79,.7);
+  background:rgba(29,63,143,.06);
+  box-shadow:0 10px 24px -14px rgba(29,63,143,.7);
 }
 
 /* ─── 4. Hero ───────────────────────────────────────────── */
@@ -189,7 +189,7 @@ a{ color:inherit; }
   isolation:isolate;
 }
 
-.hero__bg{ position:absolute; inset:0; z-index:-2; background:var(--wine); }
+.hero__bg{ position:absolute; inset:0; z-index:-2; background:var(--noche); }
 
 .hero__velvet{
   position:absolute; inset:-8% -4%;
@@ -210,13 +210,13 @@ a{ color:inherit; }
 .hero__scrim{
   position:absolute; inset:0;
   background:
-    radial-gradient(120% 55% at 50% 6%, rgba(63,10,34,.55) 0%, transparent 62%),
+    radial-gradient(120% 55% at 50% 6%, rgba(14,30,74,.55) 0%, transparent 62%),
     linear-gradient(180deg,
-      rgba(63,10,34,.20) 0%,
-      rgba(63,10,34,.05) 26%,
-      rgba(63,10,34,.55) 52%,
-      rgba(45,7,24,.92) 74%,
-      #2D0718 100%);
+      rgba(14,30,74,.20) 0%,
+      rgba(14,30,74,.05) 26%,
+      rgba(14,30,74,.55) 52%,
+      rgba(10,22,51,.92) 74%,
+      #0A1633 100%);
 }
 
 .hero__mariposa{
@@ -268,7 +268,7 @@ a{ color:inherit; }
   line-height:.88;
   letter-spacing:-.015em;
   margin:.1rem 0 .35rem;
-  background-image:linear-gradient(180deg,#FF6FAE 0%,#E5417F 30%,#B31659 64%,#7A0D3B 100%);
+  background-image:linear-gradient(180deg,#86AEF7 0%,#3B72D9 30%,#1D3F8F 64%,#12306F 100%);
   -webkit-background-clip:text; background-clip:text;
   color:transparent; -webkit-text-fill-color:transparent;
   filter:
@@ -283,7 +283,7 @@ a{ color:inherit; }
   font-size:clamp(1.3rem,5.8vw,2rem);
   font-weight:500;
   line-height:1.2;
-  color:#FDF4EE;
+  color:#F3F7FD;
   text-shadow:0 3px 16px rgba(0,0,0,.55);
 }
 
@@ -291,7 +291,7 @@ a{ color:inherit; }
   font-size:.88rem;
   font-weight:500;
   letter-spacing:.05em;
-  color:#F0DCE6;
+  color:#DBE5F6;
   text-shadow:0 2px 12px rgba(0,0,0,.6);
 }
 .hero__meta span{
@@ -315,7 +315,7 @@ a{ color:inherit; }
   font-weight:600;
   letter-spacing:.26em;
   text-transform:uppercase;
-  color:rgba(253,244,238,.7);
+  color:rgba(243,247,253,.7);
 }
 .scroll-cue i{
   width:1px; height:1.5rem;
@@ -351,7 +351,7 @@ a{ color:inherit; }
 }
 .section__title em{
   font-style:italic;
-  color:var(--magenta);
+  color:var(--azul);
 }
 
 .section__lead{
@@ -379,7 +379,7 @@ a{ color:inherit; }
   content:"";
   position:absolute; left:-.5rem; top:.4rem; bottom:.4rem;
   width:1px;
-  background:linear-gradient(180deg,transparent,rgba(163,17,79,.3),transparent);
+  background:linear-gradient(180deg,transparent,rgba(29,63,143,.3),transparent);
 }
 
 .fact dt{
@@ -387,7 +387,7 @@ a{ color:inherit; }
   font-weight:700;
   letter-spacing:.26em;
   text-transform:uppercase;
-  color:var(--magenta);
+  color:var(--azul);
   margin-bottom:.35rem;
 }
 .fact dd{ margin:0; }
@@ -428,7 +428,7 @@ a{ color:inherit; }
   padding:.7rem .2rem .6rem;
   border-radius:.9rem;
   background:linear-gradient(180deg,#fff,var(--ivory-2));
-  box-shadow:0 1px 0 rgba(255,255,255,.9) inset, 0 8px 20px -14px rgba(42,11,24,.55);
+  box-shadow:0 1px 0 rgba(255,255,255,.9) inset, 0 8px 20px -14px rgba(15,26,56,.55);
 }
 .countdown__grid b{
   display:block;
@@ -436,7 +436,7 @@ a{ color:inherit; }
   font-size:1.55rem;
   font-weight:700;
   line-height:1.05;
-  color:var(--magenta);
+  color:var(--azul);
   font-variant-numeric:tabular-nums;
 }
 .countdown__grid span{
@@ -483,7 +483,7 @@ a{ color:inherit; }
    y el hilo mostraría los colores de la noche desde el mediodía. */
 .timeline__thread-fill{
   clip-path:inset(0 0 100% 0);
-  filter:drop-shadow(0 0 5px rgba(214,51,122,.45));
+  filter:drop-shadow(0 0 5px rgba(59,114,217,.45));
 }
 
 .stop{ position:relative; padding-bottom:2.75rem; }
@@ -497,7 +497,7 @@ a{ color:inherit; }
   transform:translateX(-50%);
   border-radius:50%;
   background:var(--ivory);
-  border:1.5px solid rgba(163,17,79,.28);
+  border:1.5px solid rgba(29,63,143,.28);
   transition:background .5s var(--ease), border-color .5s var(--ease),
              box-shadow .5s var(--ease), transform .5s var(--ease);
 }
@@ -514,7 +514,7 @@ a{ color:inherit; }
   font-size:clamp(1.45rem,6.6vw,2rem);
   font-weight:500;
   line-height:1.1;
-  color:var(--magenta);
+  color:var(--azul);
   margin-bottom:.3rem;
 }
 .stop__what{
@@ -565,14 +565,14 @@ a{ color:inherit; }
   border-radius:1.15rem;
   overflow:hidden;
   cursor:zoom-in;
-  background:linear-gradient(150deg,#5E0E31,#A3114F 55%,#D6337A);
+  background:linear-gradient(150deg,#122B63,#1D3F8F 55%,#3B72D9);
   box-shadow:var(--shadow-lift);
   transition:transform .4s var(--ease), box-shadow .4s var(--ease);
 }
 .gallery__abrir:hover,
 .gallery__abrir:focus-visible{
   transform:translateY(-3px);
-  box-shadow:0 28px 56px -22px rgba(42,11,24,.6);
+  box-shadow:0 28px 56px -22px rgba(15,26,56,.6);
 }
 .gallery__abrir:active{ transform:translateY(0) scale(.99); }
 
@@ -590,8 +590,8 @@ a{ color:inherit; }
   letter-spacing:.18em;
   text-transform:uppercase;
   text-align:left;
-  color:#FDF4EE;
-  background:linear-gradient(180deg,transparent,rgba(36,5,19,.85));
+  color:#F3F7FD;
+  background:linear-gradient(180deg,transparent,rgba(6,15,40,.85));
 }
 
 /* Respaldo por si alguna foto llegara a faltar */
@@ -603,7 +603,7 @@ a{ color:inherit; }
   font-family:var(--display);
   font-style:italic;
   font-size:1.05rem;
-  color:rgba(253,244,238,.72);
+  color:rgba(243,247,253,.72);
 }
 
 /* ─── 8b. Visor de fotos ────────────────────────────────── */
@@ -613,12 +613,12 @@ a{ color:inherit; }
   max-width:none; max-height:none;
   margin:0; padding:0; border:0;
   background:transparent;
-  color:#FDF4EE;
+  color:#F3F7FD;
   overflow:hidden;
 }
 /* velo sólido, sin backdrop-filter: el desenfoque a pantalla completa
    es caro en móvil y deja halos alrededor de los botones */
-.visor::backdrop{ background:rgba(18,3,10,.94); }
+.visor::backdrop{ background:rgba(4,10,26,.94); }
 .visor[open]{
   display:flex;
   align-items:center;
@@ -641,7 +641,7 @@ a{ color:inherit; }
   margin-inline:auto;
   object-fit:contain;
   border-radius:.9rem;
-  background:#2D0718;
+  background:#0A1633;
   box-shadow:0 34px 80px -24px rgba(0,0,0,.85);
 }
 
@@ -654,7 +654,7 @@ a{ color:inherit; }
   font-weight:600;
   letter-spacing:.18em;
   text-transform:uppercase;
-  color:rgba(253,244,238,.9);
+  color:rgba(243,247,253,.9);
 }
 .visor__pie small{
   font-size:.68rem;
@@ -671,7 +671,7 @@ a{ color:inherit; }
   padding:0;
   border-radius:50%;
   border:1px solid rgba(244,223,160,.28);
-  background:rgba(36,5,19,.72);
+  background:rgba(6,15,40,.72);
   color:var(--gold-hi);
   cursor:pointer;
   transition:background .3s var(--ease), border-color .3s var(--ease), transform .3s var(--ease);
@@ -680,7 +680,7 @@ a{ color:inherit; }
 .visor__nav:hover,
 .visor__cerrar:focus-visible,
 .visor__nav:focus-visible{
-  background:rgba(163,17,79,.75);
+  background:rgba(29,63,143,.75);
   border-color:rgba(244,223,160,.6);
 }
 .visor__cerrar:active,
@@ -708,14 +708,14 @@ a{ color:inherit; }
 .gallery__dots button{
   width:.4rem; height:.4rem; padding:0;
   border:0; border-radius:50%;
-  background:rgba(163,17,79,.25);
+  background:rgba(29,63,143,.25);
   cursor:pointer;
   transition:width .35s var(--ease), background .35s var(--ease);
 }
 .gallery__dots button[aria-current="true"]{
   width:1.35rem;
   border-radius:999px;
-  background:var(--magenta);
+  background:var(--azul);
 }
 
 /* ─── 9. Mapa ───────────────────────────────────────────── */
@@ -748,7 +748,7 @@ a{ color:inherit; }
   overflow:hidden;
   background:var(--ivory-2);
   box-shadow:var(--shadow-lift);
-  border:1px solid rgba(163,17,79,.12);
+  border:1px solid rgba(29,63,143,.12);
 }
 .map iframe{
   position:absolute; inset:0;
@@ -780,16 +780,16 @@ a{ color:inherit; }
   letter-spacing:.1em;
   text-transform:uppercase;
   text-align:center;
-  color:#FDF4EE;
+  color:#F3F7FD;
   background:
-    linear-gradient(180deg,rgba(36,5,19,.28) 0%,rgba(36,5,19,.1) 40%,rgba(36,5,19,.1) 60%,rgba(36,5,19,.5) 100%);
+    linear-gradient(180deg,rgba(6,15,40,.28) 0%,rgba(6,15,40,.1) 40%,rgba(6,15,40,.1) 60%,rgba(6,15,40,.5) 100%);
   transition:opacity .35s var(--ease), visibility .35s;
 }
 .map__icono{
   display:grid; place-content:center;
   width:2.75rem; height:2.75rem;
   border-radius:50%;
-  background:rgba(36,5,19,.55);
+  background:rgba(6,15,40,.55);
   border:1px solid rgba(244,223,160,.4);
   box-shadow:0 10px 22px -8px rgba(0,0,0,.5);
 }
@@ -807,7 +807,7 @@ a{ color:inherit; }
   text-align:center;
   overflow:hidden;
   background:
-    linear-gradient(180deg,rgba(36,5,19,.55),rgba(63,10,34,.75)),
+    linear-gradient(180deg,rgba(6,15,40,.55),rgba(14,30,74,.75)),
     url("../img/terciopelo.jpg") center/cover no-repeat;
 }
 
@@ -836,15 +836,38 @@ a{ color:inherit; }
 
 .dress__note{
   font-size:.93rem;
-  color:rgba(247,225,235,.82);
+  color:rgba(220,231,247,.82);
   max-width:30ch;
   margin-inline:auto;
+}
+
+/* Aviso de colores reservados: filete dorado, sin gritar */
+.dress__reserva{
+  position:relative;
+  max-width:32ch;
+  margin:2.25rem auto 0;
+  padding:1.15rem 1.35rem 1.25rem;
+  border:1px solid rgba(244,223,160,.3);
+  border-radius:.9rem;
+  background:rgba(6,15,40,.4);
+  font-size:.88rem;
+  line-height:1.6;
+  color:rgba(220,231,247,.86);
+}
+.dress__reserva span{
+  display:block;
+  margin-bottom:.4rem;
+  font-size:.67rem;
+  font-weight:700;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--gold-hi);
 }
 
 /* ─── 11. Footer ────────────────────────────────────────── */
 .footer{
   position:relative; z-index:2;
-  background:var(--wine-deep);
+  background:var(--noche-honda);
   padding-block:3.5rem 3rem;
   text-align:center;
 }
@@ -860,12 +883,12 @@ a{ color:inherit; }
   font-size:1.5rem;
   font-weight:500;
   line-height:1.25;
-  color:#FDF4EE;
+  color:#F3F7FD;
 }
 .footer__note{
   margin-top:1.1rem;
   font-size:.85rem;
-  color:rgba(247,225,235,.55);
+  color:rgba(220,231,247,.55);
 }
 
 /* ─── 12. Barra de confirmación ─────────────────────────── */
@@ -886,8 +909,8 @@ a{ color:inherit; }
   margin-inline:auto;
   pointer-events:auto;
   box-shadow:
-    0 6px 16px -4px rgba(122,13,59,.45),
-    0 16px 34px -10px rgba(36,5,19,.55),
+    0 6px 16px -4px rgba(18,48,111,.45),
+    0 16px 34px -10px rgba(6,15,40,.55),
     inset 0 1px 0 rgba(255,255,255,.6);
 }
 
@@ -917,9 +940,9 @@ a{ color:inherit; }
      lo baja de tono para que no compita con la tarjeta. */
   body{
     padding-bottom:0;
-    background-color:#2D0718;
+    background-color:#0A1633;
     background-image:
-      linear-gradient(rgba(26,3,14,.62),rgba(26,3,14,.62)),
+      linear-gradient(rgba(5,12,31,.62),rgba(5,12,31,.62)),
       url("../img/terciopelo.jpg");
     background-size:cover;
     background-position:center;
@@ -944,13 +967,13 @@ a{ color:inherit; }
   }
   .hero__scrim{
     background:
-      radial-gradient(70% 80% at 78% 45%, rgba(45,7,24,.35) 0%, transparent 70%),
+      radial-gradient(70% 80% at 78% 45%, rgba(10,22,51,.35) 0%, transparent 70%),
       linear-gradient(90deg,
-        rgba(63,10,34,.45) 0%,
-        rgba(63,10,34,.08) 24%,
-        rgba(45,7,24,.55) 44%,
-        rgba(45,7,24,.82) 58%,
-        rgba(45,7,24,.88) 100%);
+        rgba(14,30,74,.45) 0%,
+        rgba(14,30,74,.08) 24%,
+        rgba(10,22,51,.55) 44%,
+        rgba(10,22,51,.82) 58%,
+        rgba(10,22,51,.88) 100%);
   }
   .hero__content{
     grid-column:2;

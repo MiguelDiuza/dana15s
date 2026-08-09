@@ -16,8 +16,8 @@ const CONFIG = {
 
   mensaje: '¡Hola! Confirmo mi asistencia a los 15 de Dana Isabel el sábado 22 de agosto. 🎉',
 
-  /* 22 de agosto de 2026, 6:00 p.m., hora de Colombia (UTC-5) */
-  fechaEvento: '2026-08-22T18:00:00-05:00',
+  /* 22 de agosto de 2026, 3:00 p.m., hora de Colombia (UTC-5) */
+  fechaEvento: '2026-08-22T15:00:00-05:00',
 
   /* Destino del botón "Trazar mi ruta". Si tienes el enlace exacto de la
      ficha en Google Maps, reemplaza este texto por sus coordenadas
