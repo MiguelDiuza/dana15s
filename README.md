@@ -1,7 +1,7 @@
 # Mis 15 · Dana Isabel Diuza Montaño
 
 Invitación web de una sola página para los 15 años de Dana Isabel.
-Sábado 22 de agosto de 2026, 3:00 p. m., Finca Santa Ana — Rozo, Valle del Cauca.
+Sábado 5 de septiembre de 2026, 3:00 p. m., Finca Santa Ana — Rozo, Valle del Cauca.
 
 HTML, CSS y JavaScript planos. Sin build, sin `npm install`, sin dependencias
 externas en tiempo de ejecución: abre `index.html` y funciona.
@@ -159,6 +159,6 @@ Si el JavaScript no carga, la página se ve completa y legible igual.
   Rozo, Palmira` y el pin aparece correctamente. Si tienes las coordenadas
   exactas, reemplázalas en `CONFIG.lugar` ([main.js](assets/js/main.js)) y en el
   `src` del `<iframe>` ([index.html](index.html)) para afinarlo.
-- **La cuenta regresiva** apunta a `2026-08-22T18:00:00-05:00`. Al llegar la
+- **La cuenta regresiva** apunta a `2026-09-05T15:00:00-05:00`. Al llegar la
   fecha se reemplaza sola por "Hoy es el día".
 - **Al compartir por WhatsApp** se muestra el flyer original como vista previa.
